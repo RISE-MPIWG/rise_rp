@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -my wget gnupg && apt-get update && apt-ge
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && apt-get install -y nodejs
 
-ENV INSTALL_PATH /rise
+ENV INSTALL_PATH /rise_rp
 
 RUN mkdir -p $INSTALL_PATH
 
@@ -19,6 +19,7 @@ COPY Gemfile Gemfile.lock ./
 COPY Gemfile Gemfile
 RUN gem install bundler
 RUN bundle install
+VOLUME ["$INSTALL_PATH/public"]
 
 COPY . .
 

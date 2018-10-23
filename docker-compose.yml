@@ -17,7 +17,7 @@ services:
     ports:
       - '4000:4000'
     volumes:
-      - '.:/rise'
+      - '.:/rise_rp'
     env_file:
       - '.env'
 

@@ -1,5 +1,5 @@
 .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3
-  %h1.h2 Resources
+  %h1.h4 #{link_to truncate(@collection.name, length: 20), Collection} > Resources
   .btn-toolbar.mb-2.mb-md-0
     .btn-group.mr-2
       = link_to new_collection_resource_path(@collection), class: 'btn btn-sm btn-outline-secondary' do
@@ -15,6 +15,7 @@
         %th uuid
         %th Name
         %th Metadata
+        %th Section Count
         %th Actions
     %tbody
       - @resources.each do |resource|
@@ -22,14 +23,15 @@
           %td= resource.uuid
           %td= resource.name
           %td= resource.metadata
+          %td= resource.sections.size
           %td
             .btn-group-vertical
-              = link_to edit_collection_resource_path(id: resource.id, collection_id: @collection.id), class: 'btn btn-sm btn-outline-secondary' do
-                %span{"data-feather" => "edit"}
-                Edit
               = link_to resource_sections_path(resource), class: 'btn btn-sm btn-outline-secondary' do
                 %span{"data-feather" => "book"}
                 Sections
+              = link_to edit_collection_resource_path(id: resource.id, collection_id: @collection.id), class: 'btn btn-sm btn-outline-secondary' do
+                %span{"data-feather" => "edit"}
+                Edit
               = link_to collection_resource_path(id: resource.id, collection_id: @collection.id), method: :delete, class: 'btn btn-sm btn-outline-secondary' do 
                 %span{"data-feather" => "x-circle"}
                 Delete

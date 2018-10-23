@@ -1,0 +1,32 @@
+.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3
+  %h1.h4 #{link_to truncate(@section.resource.collection.name, length: 20), [@section.resource.collection, Resource]} > #{link_to truncate(@section.resource.name, length: 20), [@section.resource, Section]} > #{link_to truncate(@section.name, length: 20), [@section, ContentUnit]} > Content Units
+  .btn-toolbar.mb-2.mb-md-0
+    .btn-group.mr-2
+      = link_to new_section_content_unit_path(@section), class: 'btn btn-sm btn-outline-secondary' do
+        %span{"data-feather" => "plus"}
+        New Content Unit
+      = link_to import_section_content_units_path(@section), class: 'btn btn-sm btn-outline-secondary' do 
+        %span{"data-feather" => "upload"}
+        Import Content Units
+.table-responsive
+  %table.table.table-striped.table-sm
+    %thead
+      %tr
+        %th uuid
+        %th Name
+        %th Metadata
+        %th Actions
+    %tbody
+      - @content_units.each do |content_unit|
+        %tr
+          %td= content_unit.uuid
+          %td= content_unit.name
+          %td= content_unit.metadata
+          %td
+            .btn-group-vertical
+              = link_to edit_section_content_unit_path(id: content_unit.id, section_id: @section.id), class: 'btn btn-sm btn-outline-secondary' do
+                %span{"data-feather" => "edit"}
+                Edit
+              = link_to section_content_unit_path(id: content_unit.id, section_id: @section.id), method: :delete, class: 'btn btn-sm btn-outline-secondary' do 
+                %span{"data-feather" => "x-circle"}
+                Delete

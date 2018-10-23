@@ -15,7 +15,15 @@ RiseRp::Application.routes.draw do
   end
 
   resources :resources, controller: 'collections/resources' do
-    resources :sections do
+    resources :sections, controller: 'resources/sections' do
+      collection do
+        get :import
+      end
+    end
+  end
+
+  resources :sections, controller: 'resources/sections' do
+    resources :content_units, controller: 'sections/content_units' do
       collection do
         get :import
       end
