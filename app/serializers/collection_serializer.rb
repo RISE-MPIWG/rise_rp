@@ -21,3 +21,4 @@
 
 class CollectionSerializer < ApplicationSerializer
   attributes :uuid, :name
+end

@@ -4,7 +4,7 @@ module Api
       class SectionsController < Api::ApiController
         before_action :set_resource, only: %i{index}
         def index
-          render json: @sections
+          render json: @resource.sections
         end
 
         private
