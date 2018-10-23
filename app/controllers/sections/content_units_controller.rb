@@ -1,6 +1,6 @@
 module Sections
   class ContentUnitsController < ApplicationController
-    before_action :set_section, only: %i[index import new create destroy]
+    before_action :set_section, only: %i[index edit update import new create destroy]
     before_action :set_content_unit, only: %i[show edit update destroy]
   
     def index
@@ -21,7 +21,7 @@ module Sections
     def create
       @content_unit = @section.content_units.build(content_unit_params)
       if @content_unit.save
-        redirect_to [@section, ContentUnit], notice: 'ContentUnit was successfully created.'
+        redirect_to [@section, ContentUnit], notice: 'Content Unit was successfully created.'
       else
         render :new
       end
@@ -29,7 +29,7 @@ module Sections
   
     def update
       if @content_unit.update(content_unit_params)
-        redirect_to [@section, :content_units], notice: 'ContentUnit was successfully updated.'
+        redirect_to [@section, :content_units], notice: 'Content Unit was successfully updated.'
       else
         render :edit
       end
@@ -49,7 +49,7 @@ module Sections
     end
   
     def content_unit_params
-      params.fetch(:content_unit, {}).permit(:name, :section_id)
+      params.fetch(:content_unit, {}).permit(:name, :content)
     end
   end
 end

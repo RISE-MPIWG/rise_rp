@@ -1,6 +1,6 @@
 module Resources
   class SectionsController < ApplicationController
-    before_action :set_resource, only: %i[index import new create destroy]
+    before_action :set_resource, only: %i[index edit update import new create destroy]
     before_action :set_section, only: %i[show edit update destroy]
   
     def index

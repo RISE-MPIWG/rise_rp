@@ -1,6 +1,6 @@
 module Collections
   class ResourcesController < ApplicationController
-    before_action :set_collection, only: %i[index import new create destroy]
+    before_action :set_collection, only: %i[index edit update import new create destroy]
     before_action :set_resource, only: %i[show edit update destroy]
   
     def index
