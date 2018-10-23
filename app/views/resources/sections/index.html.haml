@@ -14,6 +14,7 @@
       %tr
         %th uuid
         %th Name
+        %th Parent
         %th Metadata
         %th Content Unit Count
         %th Actions
@@ -22,6 +23,7 @@
         %tr
           %td= section.uuid
           %td= section.name
+          %td= section.has_parent? ? section.parent.name : 'none'
           %td= section.metadata
           %td= section.content_units.size
           %td

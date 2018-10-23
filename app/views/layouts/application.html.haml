@@ -1,8 +1,9 @@
 !!!
 %html{:lang => "en"}
   %head
-    %meta{:charset => "utf-8"}/
-    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+    %meta{:charset => "utf-8"}
+    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}
+    %script{:src => "https://unpkg.com/feather-icons/dist/feather.min.js"}
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -44,6 +45,5 @@
                   Security
         %main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4{:role => "main"}
           = yield
-  %script{:src => "https://unpkg.com/feather-icons/dist/feather.min.js"}
-  :javascript
-    feather.replace()
+:javascript
+  feather.replace()

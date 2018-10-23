@@ -49,7 +49,7 @@ module Resources
     end
   
     def section_params
-      params.fetch(:section, {}).permit(:name, :resource_id)
+      params.fetch(:section, {}).permit(:name, :resource_id, :parent_id)
     end
   end
 end

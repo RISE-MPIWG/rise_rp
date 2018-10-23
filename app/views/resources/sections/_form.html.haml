@@ -1,4 +1,5 @@
 = simple_form_for([@resource, @section]) do |f|
   = f.error_notification
   = f.input :name
+  = f.input :parent_id, collection: @resource.sections.where.not(id: @section.id) , value_method: :id, as: :select, include_blank: true
   = f.button :button, type: :submit, class: 'btn btn-primary'
