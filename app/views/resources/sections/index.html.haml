@@ -1,5 +1,5 @@
 .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3
-  %h1.h4 #{link_to truncate(@resource.collection.name, length: 20), [@resource.collection, Resource]} > #{link_to truncate(@resource.name, lenght: 20), [@resource.collection, Resource]} > Sections
+  %h1.h4 #{link_to truncate(@resource.collection.name, length: 20), [@resource.collection, Resource]} > #{link_to truncate(@resource.name, lenght: 20), [@resource, Section]} > Sections
   .btn-toolbar.mb-2.mb-md-0
     .btn-group.mr-2
       = link_to new_resource_section_path(@resource), class: 'btn btn-sm btn-outline-secondary' do
