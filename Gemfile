@@ -6,6 +6,8 @@ gem 'pg'
 gem 'jquery-rails'
 gem 'puma'
 gem 'cocoon'
+gem 'simple_form'
+gem 'ancestry'
 
 group :development, :test do
   gem 'rspec-rails'
