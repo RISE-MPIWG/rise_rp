@@ -1,0 +1,23 @@
+.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3
+  %h1.h2 Collections
+  .btn-toolbar.mb-2.mb-md-0
+    .btn-group.mr-2
+      = link_to new_collection_path, class: 'btn btn-sm btn-outline-secondary' do
+        %span{"data-feather" => "plus"}
+        New Collection
+      = link_to import_collections_path, class: 'btn btn-sm btn-outline-secondary' do 
+        %span{"data-feather" => "upload"}
+        Import
+.table-responsive
+  %table.table.table-striped.table-sm
+    %thead
+      %tr
+        %th uuid
+        %th Name
+        %th Metadata
+    %tbody
+      - @collections.each do |collection|
+        %tr
+          %td= collection.uuid
+          %td= collection.name
+          %td= collection.metadata
