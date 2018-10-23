@@ -1,0 +1,1 @@
+RiseRp::Application.config.secret_key_base = '8cfaac493139c7f27d9db5cbd8f447846aa3037cf9c1dd7d5965b43e87b2eb5fee116f384a7736a55f4e7962e6207a9e33c53d76115d3ff8c357d4319a4c3354'

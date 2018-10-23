@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: 'rise_rp'
+      POSTGRES_PASSWORD: 'rise_rp_password'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+  web:
+    tty: true
+    stdin_open: true
+    links:
+      - 'postgres'
+    build: .
+    ports:
+      - '4000:4000'
+    volumes:
+      - '.:/rise'
+    env_file:
+      - '.env'
+
+volumes:
+  postgres:
+

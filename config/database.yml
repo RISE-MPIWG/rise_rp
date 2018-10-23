@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: utf-8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: rise_rp
+  password: rise_rp_password
+  host: postgres
+
+development:
+  <<: *default
+  database: rise_rp_development
+
+test:
+  <<: *default
+  database: rise_test
+
+production:
+  <<: *default
+  database: rise_rp_production
