@@ -19,19 +19,5 @@
 #  resources_url      :string
 #
 
-class Collection < ApplicationRecord
-  include UuidFindable
-  default_scope { order(name: :asc) }
-
-  has_many :resources, inverse_of: :collection, dependent: :delete_all
-  has_many :sections, through: :resources
-  has_many :content_units, through: :resources
-
-  def to_s
-    name
-  end
-
-  def resource_count
-    resources.count
-  end
-end
+class CollectionSerializer < ApplicationSerializer
+  attributes :uuid, :name

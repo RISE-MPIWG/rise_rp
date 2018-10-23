@@ -15,9 +15,21 @@
         %th uuid
         %th Name
         %th Metadata
+        %th Actions
     %tbody
       - @collections.each do |collection|
         %tr
           %td= collection.uuid
           %td= collection.name
           %td= collection.metadata
+          %td
+            .btn-group-vertical
+              = link_to edit_collection_path(collection), class: 'btn btn-sm btn-outline-secondary' do
+                %span{"data-feather" => "edit"}
+                Edit
+              = link_to collection_resources_path(collection), class: 'btn btn-sm btn-outline-secondary' do
+                %span{"data-feather" => "book"}
+                Resources
+              = link_to collection, method: :delete, class: 'btn btn-sm btn-outline-secondary' do 
+                %span{"data-feather" => "x-circle"}
+                Delete

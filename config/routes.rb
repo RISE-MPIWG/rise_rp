@@ -3,12 +3,21 @@ RiseRp::Application.routes.draw do
   
   root 'pages#index'  
 
-  resources :collections, only: [:index, :show, :new, :update] do
+  resources :collections do
     collection do 
       get :import
     end
-    resources :resources do 
-      resources :sections do
+    resources :resources, controller: 'collections/resources' do
+      collection do 
+        get :import
+      end
+    end
+  end
+
+  resources :resources, controller: 'collections/resources' do
+    resources :sections do
+      collection do
+        get :import
       end
     end
   end

@@ -1,4 +1,4 @@
-= simple_form_for(@collection) do |f|
+= simple_form_for([@collection, @resource]) do |f|
   = f.error_notification
   = f.input :name
   = f.button :button, type: :submit, class: 'btn btn-primary'

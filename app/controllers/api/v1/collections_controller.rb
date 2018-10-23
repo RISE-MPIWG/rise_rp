@@ -3,7 +3,7 @@ module Api
     class CollectionsController < Api::ApiController
       before_action :set_collection, only: %i{show}
       def index
-        paginate json: @collections
+        render json: @collections
       end
 
       def show

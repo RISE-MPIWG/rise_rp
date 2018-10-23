@@ -27,10 +27,15 @@ class CollectionsController < ApplicationController
 
   def update
     if @collection.update(collection_params)
-      redirect_to [:edit, @collection], notice: 'Collection was successfully updated.'
+      redirect_to Collection, notice: 'Collection was successfully updated.'
     else
       render :edit
     end
+  end
+
+  def destroy
+    @collection.destroy
+    redirect_to Collection, notice: 'Collection deleted'
   end
 
   def set_collection

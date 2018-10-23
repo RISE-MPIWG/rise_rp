@@ -4,7 +4,7 @@ module Api
       before_action :set_resource, only: %i{show metadata}
 
       def index
-        paginate json: @resources
+        render json: @resources
       end
 
       def show

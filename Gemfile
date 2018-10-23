@@ -1,10 +1,12 @@
 source 'http://rubygems.org'
 
+gem 'active_model_serializers'
 gem 'rails'
 gem 'haml-rails'
 gem 'pg'
 gem 'jquery-rails'
 gem 'puma'
+gem 'oj'
 gem 'cocoon'
 gem 'simple_form'
 gem 'ancestry'
@@ -17,6 +19,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'database_cleaner'
+  gem 'byebug'
 end
 
 group :assets do

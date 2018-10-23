@@ -5,7 +5,7 @@ module Api
         before_action :set_collection, only: %i{index}
 
         def index
-          paginate json: @resources, each_serializer: CollectionResourceSerializer
+          render json: @collection.resources, each_serializer: CollectionResourceSerializer
         end
 
         private

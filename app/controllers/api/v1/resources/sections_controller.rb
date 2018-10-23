@@ -4,7 +4,7 @@ module Api
       class SectionsController < Api::ApiController
         before_action :set_resource, only: %i{index}
         def index
-          paginate json: @sections
+          render json: @sections
         end
 
         private

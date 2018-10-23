@@ -5,7 +5,7 @@ module Api
         before_action :set_section, only: %i{index docusky_index}
 
         def index
-          paginate json: @content_units
+          render json: @content_units
         end
 
         private
