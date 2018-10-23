@@ -8,7 +8,7 @@
     = csrf_meta_tags
   %body
     %nav.navbar.navbar-dark.sticky-top.bg-dark.flex-md-nowrap.p-0
-      %a.navbar-brand.col-sm-3.col-md-2.mr-0{:href => "#"} Rise Resource Provider
+      = link_to 'Rise Resource Provider', root_path, class: 'navbar-brand col-sm-3 col-md-2 mr-0'
       //%input.form-control.form-control-dark.w-100{"aria-label" => "Search", :placeholder => "Search", :type => "text"}/
       //%ul.navbar-nav.px-3
       //  %li.nav-item.text-nowrap
@@ -19,7 +19,7 @@
           .sidebar-sticky
             %ul.nav.flex-column
               %li.nav-item
-                = active_link_to [:pages], class: 'nav-link' do
+                = active_link_to root_path,active: [pages: :index], class: 'nav-link' do
                   %span{"data-feather" => "home"}
                   Home
                 %span.sr-only (current)
