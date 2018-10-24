@@ -22,7 +22,7 @@ namespace :import do
   desc 'import OTA corpus'
   task ota: :environment do
     files_path = './ota/text'
-    col = Collection.find_or_create_by(name: ' Oxford Text Archive', metadata: { content_unit_type: 'line' })
+    col = Collection.find_or_create_by(name: 'Oxford Text Archive', metadata: { content_unit_type: 'line' })
     
     tsv = StrictTsv.new("./ota/metadata.tsv")
     tsv.parse do |row|
@@ -33,6 +33,16 @@ namespace :import do
       year = row['Year']
       language = row['Language']
       license = row['License']
+
+      language = case language
+      when 'English'
+        'en-GB'
+      when 'Latin'
+        'lat'
+      else
+        language
+      end
+
       file = open(url)
       resource = col.resources.build(name: title, metadata: { author: author, language: language, year: year, license: license})
       section = resource.sections.build(name: resource.name)
