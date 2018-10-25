@@ -12,6 +12,10 @@ gem 'simple_form'
 gem 'ancestry'
 gem 'bootstrap', '~> 4.1.3'
 gem 'active_link_to'
+gem 'kaminari'
+gem 'api-pagination'
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
 
 
 group :development, :test do

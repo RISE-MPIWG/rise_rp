@@ -4,7 +4,7 @@ module Resources
     before_action :set_section, only: %i[show edit update destroy]
   
     def index
-    	@sections = @resource.sections
+    	@sections = @resource.sections.page params['page']
     end
   
     def import

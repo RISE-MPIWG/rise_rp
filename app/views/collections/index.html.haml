@@ -35,3 +35,5 @@
               = link_to collection, method: :delete, class: 'btn btn-sm btn-outline-secondary' do 
                 %span{"data-feather" => "x-circle"}
                 Delete
+
+= paginate @collections, theme: 'twitter-bootstrap-4'

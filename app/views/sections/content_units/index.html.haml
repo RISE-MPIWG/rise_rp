@@ -32,3 +32,5 @@
               = link_to section_content_unit_path(id: content_unit.id, section_id: @section.id), method: :delete, class: 'btn btn-sm btn-outline-secondary' do 
                 %span{"data-feather" => "x-circle"}
                 Delete
+
+= paginate @content_units, theme: 'twitter-bootstrap-4'

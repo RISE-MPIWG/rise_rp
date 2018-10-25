@@ -20,6 +20,7 @@
 #
 
 class Collection < ApplicationRecord
+  paginates_per 50
   include UuidFindable
   default_scope { order(name: :asc) }
 

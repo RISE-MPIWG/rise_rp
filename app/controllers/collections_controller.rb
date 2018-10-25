@@ -2,7 +2,7 @@ class CollectionsController < ApplicationController
   before_action :set_collection, only: %i[show edit update destroy]
 
   def index
-  	@collections = Collection.all
+  	@collections = Collection.all.page params[:page]
   end
 
   def import

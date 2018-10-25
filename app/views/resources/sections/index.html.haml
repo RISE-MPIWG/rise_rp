@@ -37,3 +37,4 @@
               = link_to resource_section_path(id: section.id, resource_id: @resource.id), method: :delete, class: 'btn btn-sm btn-outline-secondary' do 
                 %span{"data-feather" => "x-circle"}
                 Delete
+= paginate @sections, theme: 'twitter-bootstrap-4'

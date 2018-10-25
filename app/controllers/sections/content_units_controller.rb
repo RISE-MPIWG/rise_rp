@@ -4,7 +4,7 @@ module Sections
     before_action :set_content_unit, only: %i[show edit update destroy]
   
     def index
-    	@content_units = @section.content_units
+    	@content_units = @section.content_units.page params['page']
     end
   
     def import

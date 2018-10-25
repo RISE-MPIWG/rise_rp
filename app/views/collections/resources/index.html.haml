@@ -35,3 +35,5 @@
               = link_to collection_resource_path(id: resource.id, collection_id: @collection.id), method: :delete, class: 'btn btn-sm btn-outline-secondary' do 
                 %span{"data-feather" => "x-circle"}
                 Delete
+
+= paginate @resources, theme: 'twitter-bootstrap-4'
