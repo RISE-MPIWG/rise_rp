@@ -32,7 +32,9 @@ namespace :import do
       resource = col.resources.build(name: title, metadata: { author: author, language: language, year: year, book_type: book_type, content_unit_type: 'line'})
       section = resource.sections.build(name: resource.name)
       file.each_line do |line|
-        section.content_units.build(content: line)
+        unless (line.empty? || line =~ /\A\s*\Z/)
+          section.content_units.build(content: line)
+        end
       end
       resource.save
       section.save

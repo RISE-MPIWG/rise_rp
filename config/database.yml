@@ -2,8 +2,8 @@ default: &default
   adapter: postgresql
   encoding: utf-8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: rise_rp
-  password: rise_rp_password
+  username: 'rise_rp'
+  password: 'rise_rp_password'
   host: postgres
 
 development:

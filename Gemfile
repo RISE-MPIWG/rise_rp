@@ -17,7 +17,6 @@ gem 'api-pagination'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 
-
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'

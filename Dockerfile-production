@@ -17,7 +17,7 @@ RUN mkdir -p $INSTALL_PATH
 WORKDIR $INSTALL_PATH
 
 COPY Gemfile Gemfile.lock ./
-ADD Gemfile /rise/Gemfile
+ADD Gemfile /rise_rp/Gemfile
 ADD Gemfile.lock /rise_rp/Gemfile.lock
 RUN gem install bundler
 RUN bundle install

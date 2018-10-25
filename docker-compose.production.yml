@@ -1,28 +1,20 @@
 version: '3.6'
 
 services:
-
   nginx:
     restart: always
     build: ./docker_containers/production/nginx
-    image: docker.gitlab.gwdg.de/portal.pbeloui/rise/nginx_production:latest
+    image: docker.gitlab.gwdg.de/portal.pbeloui/rise_rp/nginx_production:latest
     links:
       - web:web
     ports:
+      - "443:443"
       - "80:80"
     volumes:
-      - rails-assets:/rise/public/assets
-      - rails-uploads:/rise/uploads
+      - rails-assets:/rise_rp/public/assets
+      - rails-uploads:/rise_rp/uploads
     depends_on:
       - web
-  postgres:
-    restart: always
-    image: 'postgres'
-    environment:
-      POSTGRES_USER: 'rise'
-      POSTGRES_PASSWORD: 'risepassword'
-    volumes:
-      - 'postgres:/var/lib/postgresql/data'
   web:
     restart: always
     depends_on:
@@ -30,46 +22,41 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile-production
+    image: docker.gitlab.gwdg.de/portal.pbeloui/rise_rp/web:latest
     env_file:
       - '.production.env'
     volumes:
-      - rails-assets:/rise/public/assets
+      - rails-assets:/rise_rp/public/assets
       - ~/.bash_history:/root/.bash_history
     command: puma -C ./config/puma.rb
     deploy:
       replicas: 2
+  postgres:
+    restart: always
+    image: 'postgres'
+    environment:
+      POSTGRES_USER: 'rise_rp'
+      POSTGRES_PASSWORD: 'rise_rp_password'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+  portainer:
+    ports: 
+      - '9000:9000'
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
     deploy:
       placement:
         constraints:
           - node.role == manager
-  pgbackups:
-    image: prodrigestivill/postgres-backup-local
-    restart: always
-    volumes:
-      - pg_backups:/backups
-    links:
-      - postgres
-    depends_on:
-      - postgres
-    environment:
-      POSTGRES_HOST: 'postgres'
-      POSTGRES_DB: 'rise_production'
-      POSTGRES_USER: 'rise'
-      POSTGRES_PASSWORD: 'risepassword'
-      POSTGRES_EXTRA_OPTS: '-Z9 --schema=public --blobs'
-      SCHEDULE: '@daily'
-      BACKUP_KEEP_DAYS: '7'
-      BACKUP_KEEP_WEEKS: '4'
-      BACKUP_KEEP_MONTHS: '6'
-
 volumes:
-  pg_backups:
-    driver: local
   postgres:
     driver: local
   rails-assets:
     driver: local
   rails-uploads:
+    driver: local
+  portainer_data:
     driver: local
