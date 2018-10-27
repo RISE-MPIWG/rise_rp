@@ -11,7 +11,7 @@
     %nav.navbar.navbar-dark.sticky-top.bg-dark.flex-md-nowrap.p-0
       = link_to 'Rise Resource Provider', root_path, class: 'navbar-brand col-sm-3 col-md-2 mr-0'
       = form_tag :search, url: search_path, method: :get, style: 'width:100%' do |f|
-        = text_field_tag :q,nil, autofocus: true, class: 'form-control form-control-dark w-100', placeholder: 'Search'
+        = text_field_tag :q,@q, autofocus: true, class: 'form-control form-control-dark w-100', placeholder: 'Search'
       %ul.navbar-nav.px-3
         %li.nav-item.text-nowrap
           %a.nav-link{:href => "#"} Sign out
