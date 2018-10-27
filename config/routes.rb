@@ -3,6 +3,8 @@ RiseRp::Application.routes.draw do
   
   root 'pages#index'  
 
+  get :search, to: 'collections/resources#search'
+
   resources :collections do
     collection do 
       get :import

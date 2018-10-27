@@ -6,6 +6,11 @@ module Collections
     def index
     	@resources = @collection.resources.page params[:page]
     end
+
+    def search
+      @q = params[:q]
+      @content_units = ContentUnit.where("content ilike '%#{@q}%'").includes(section: {resource: :collection}).page params[:page]
+    end
   
     def import
     end

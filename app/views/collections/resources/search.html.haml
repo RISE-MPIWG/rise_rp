@@ -1,0 +1,20 @@
+.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3
+  %h1.h4 Search Results
+.table-responsive
+  %table.table.table-striped.table-sm
+    %thead
+      %tr
+        %th Collection
+        %th Resource
+        %th Section
+        %th Context
+    %tbody
+      - @content_units.each do |cu|
+        %tr
+          %td= cu.section.resource.collection.name
+          %td= cu.section.resource.name
+          %td= cu.section.name
+          %td= excerpt(cu.content, @q, radius: 50)    
+
+= paginate @content_units, theme: 'twitter-bootstrap-4'
+  
