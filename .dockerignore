@@ -1,0 +1,10 @@
+.git
+.dockerignore
+.byebug_history
+/log/*
+/tmp/*
+/docker_containers/*
+/uploads/*
+/node_modules
+/corpora/cenlab/texts/*
+/corpora/novels/*

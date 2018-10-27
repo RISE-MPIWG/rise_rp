@@ -21,10 +21,19 @@ end
 namespace :import do  
   desc 'import OTA corpus'
   task ota: :environment do
-    files_path = './ota/text'
+    files_path = './corpora/ota/text'
     col = Collection.find_or_create_by(name: 'Oxford Text Archive', metadata: { content_unit_type: 'line' })
+    res_ids = col.resources.map(&:id)
+    sec_ids = Section.where(resource_id: res_ids)
+    ContentUnit.where(section_id: sec_ids).delete_all
+    Section.where(resource_id: res_ids).delete_all
+    Resource.where(collection_id: col.id).delete_all
+    col.destroy
+
+    col = Collection.find_or_create_by(name: 'Oxford Text Archive', metadata: { content_unit_type: 'line' })
+
     
-    tsv = StrictTsv.new("./ota/metadata.tsv")
+    tsv = StrictTsv.new("./corpora/ota/metadata.tsv")
     tsv.parse do |row|
       id = row['ID']
       url = row['URL']

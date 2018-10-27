@@ -3,6 +3,12 @@ module Api
     class ResourcesController < Api::ApiController
       before_action :set_resource, only: %i{show metadata}
 
+      def search
+        @q = params[:q]
+        @content_units = ContentUnit.where("content ilike '%#{@q}%'").includes(:section, section: :resource, section: {resource: :collection})
+        render json: @content_units, each_serializer: SearchResultContentUnitSerializer, q: @q
+      end
+
       def index
         render json: @resources
       end

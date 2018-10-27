@@ -39,6 +39,7 @@ RiseRp::Application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+      get :full_text_search, param: :q, to: 'resources#search'
       resources :collections, param: :uuid, only: %i{index show} do
         resources :resources, only: %i{index}, controller: 'collections/resources' do
         end
