@@ -9,7 +9,7 @@ module Collections
 
     def search
       @q = params[:q]
-      @content_units = ContentUnit.where("content ilike '%#{@q}%'").includes(section: {resource: :collection}).page params[:page]
+      @content_units = ContentUnit.search @q, page: params[:page], per_page: 20, highlight: true, includes: {section: {resource: :collection}}
     end
   
     def import

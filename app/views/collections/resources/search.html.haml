@@ -9,12 +9,12 @@
         %th Section
         %th Context
     %tbody
-      - @content_units.each do |cu|
+      - @content_units.with_highlights.each do |cu, highlight|
         %tr
           %td= cu.section.resource.collection.name
           %td= cu.section.resource.name
           %td= cu.section.name
-          %td= excerpt(cu.content, @q, radius: 50)    
+          %td= highlight[:content].html_safe  
 
 = paginate @content_units, theme: 'twitter-bootstrap-4'
   

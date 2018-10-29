@@ -21,6 +21,12 @@ services:
     env_file:
       - '.env'
 
+  elasticsearch:
+    build: ./docker_containers/elasticsearch
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
 volumes:
   postgres:
+  esdata:
 

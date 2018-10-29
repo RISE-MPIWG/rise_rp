@@ -17,4 +17,5 @@ class ContentUnit < ApplicationRecord
   default_scope { order(id: :asc) }
   include UuidFindable
   belongs_to :section, inverse_of: :content_units
+  searchkick
 end

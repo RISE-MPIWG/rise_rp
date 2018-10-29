@@ -5,8 +5,17 @@ module Api
 
       def search
         @q = params[:q]
-        @content_units = ContentUnit.where("content ilike '%#{@q}%'").includes(:section, section: :resource, section: {resource: :collection})
-        render json: @content_units, each_serializer: SearchResultContentUnitSerializer, q: @q
+        content_units = ContentUnit.search @q, highlight: false, includes: {section: {resource: :collection}}
+        @results = []
+        content_units.with_highlights.each do |cu, highlight|
+          result = {}
+          result[:section_id] = cu.section_id
+          result[:resource_id] = cu.section.resource_id
+          result[:collection_id] = cu.section.resource.collection_id
+          result[:context] = cu.content
+          @results << result
+        end
+        render json: @results.to_json
       end
 
       def index

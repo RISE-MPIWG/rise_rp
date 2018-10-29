@@ -16,7 +16,7 @@ class SearchResultContentUnitSerializer < ApplicationSerializer
   end
 
   def context
-    excerpt(object.content, instance_options[:q], radius: 50)
+    highlight[:content].html_safe
   end
 end
 

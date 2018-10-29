@@ -63,5 +63,6 @@ namespace :import do
       resource.save
       section.save
     end
+    ContentUnit.reindex
   end
 end

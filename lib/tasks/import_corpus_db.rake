@@ -46,5 +46,6 @@ namespace :import do
       #rescue
       #end
     end
+    ContentUnit.reindex
   end
 end
