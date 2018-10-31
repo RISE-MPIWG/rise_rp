@@ -6,5 +6,3 @@
 /docker_containers/*
 /uploads/*
 /node_modules
-/corpora/cenlab/texts/*
-/corpora/novels/*

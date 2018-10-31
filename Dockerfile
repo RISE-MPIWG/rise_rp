@@ -1,4 +1,4 @@
-FROM ruby:2.3-slim
+FROM ruby:latest
 
 MAINTAINER Pascal Belouin <pbelouin@mpiwg-berlin.mpg.de>
 

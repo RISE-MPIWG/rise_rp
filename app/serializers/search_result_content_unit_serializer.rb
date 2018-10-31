@@ -1,5 +1,3 @@
-include ActionView::Helpers
-
 class SearchResultContentUnitSerializer < ApplicationSerializer
   attributes :collection_uuid, :resource_uuid, :section_uuid, :uuid, :context
 

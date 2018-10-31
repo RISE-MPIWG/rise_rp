@@ -32,7 +32,6 @@ namespace :import do
 
     col = Collection.find_or_create_by(name: 'Oxford Text Archive', metadata: { content_unit_type: 'line' })
 
-    
     tsv = StrictTsv.new("./corpora/ota/metadata.tsv")
     tsv.parse do |row|
       id = row['ID']
@@ -63,6 +62,5 @@ namespace :import do
       resource.save
       section.save
     end
-    ContentUnit.reindex
   end
 end
