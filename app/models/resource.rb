@@ -17,6 +17,8 @@ class Resource < ApplicationRecord
 
   include UuidFindable
 
+  default_scope { order(name: :asc) }
+
   belongs_to :collection, inverse_of: :resources
 
   has_many :sections, inverse_of: :resource, dependent: :destroy

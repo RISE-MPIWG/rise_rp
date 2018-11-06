@@ -21,6 +21,8 @@ class Section < ApplicationRecord
   belongs_to :resource, inverse_of: :sections
   has_many :content_units, inverse_of: :section, dependent: :destroy
 
+  default_scope { order(name: :asc) }
+
   def content_unit_count
     content_units.count
   end
