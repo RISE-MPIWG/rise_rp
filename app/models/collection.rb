@@ -18,7 +18,7 @@ class Collection < ApplicationRecord
 
   has_many :resources, inverse_of: :collection, dependent: :destroy
   has_many :sections, through: :resources, dependent: :destroy
-  has_many :content_units, through: :resources
+  has_many :content_units, through: :resources, dependent: :destroy
 
   IMPORT_TYPES = { script: 0, folder: 1, views: 2 }.freeze
 
@@ -40,6 +40,7 @@ class Collection < ApplicationRecord
       cfp = CollectionFolderParser.new(self)
       cfp.create_hierarchy
       cfp.add_metadata
+      ContentUnit.reindex
     when :views
     end
   end
