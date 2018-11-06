@@ -26,12 +26,12 @@ class CollectionFolderParser
     file_paths.each do |path|
       path_array = path.split('/')
       path_array.each_cons(2) do |previous, element|
-      	if element.include? '.yaml'
-      	  yaml_data = YAML::load_file(path)
-      	  target = Collection.find_by(name: previous) || Resource.find_by(name: previous) || Section.find_by(name: previous) || ContentUnit.find_by(name: previous)
-      	  target.metadata = yaml_data
-      	  target.save
-      	end
+        if element.include? '.yaml'
+          yaml_data = YAML::load_file(path)
+          target = Collection.find_by(name: previous) || Resource.find_by(name: previous) || Section.find_by(name: previous)
+          target.metadata = yaml_data
+          target.save
+        end
       end
     end
   end
