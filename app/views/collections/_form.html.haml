@@ -1,4 +1,6 @@
 = simple_form_for(@collection) do |f|
   = f.error_notification
   = f.input :name
+  = f.input :import_type, include_blank: false, collection: Collection::IMPORT_TYPES
+  = f.input :import_folder
   = f.button :button, type: :submit, class: 'btn btn-primary'

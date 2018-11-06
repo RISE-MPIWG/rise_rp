@@ -26,8 +26,11 @@ ActiveRecord::Schema.define(version: 2017_09_18_133646) do
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
     t.string "name"
     t.jsonb "metadata", default: "{}", null: false
+    t.integer "import_type", default: 0
+    t.string "import_folder"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["import_type"], name: "index_collections_on_import_type"
     t.index ["metadata"], name: "index_collections_on_metadata", using: :gin
   end
 

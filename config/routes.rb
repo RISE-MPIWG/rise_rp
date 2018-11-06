@@ -3,7 +3,7 @@ RiseRp::Application.routes.draw do
   
   root 'pages#index'  
 
-  get :search, to: 'collections/resources#search'
+  get :search, to: 'resources#search'
 
   resources :collections do
     collection do 
@@ -16,7 +16,7 @@ RiseRp::Application.routes.draw do
     end
   end
 
-  resources :resources, controller: 'collections/resources' do
+  resources :resources do
     resources :sections, controller: 'resources/sections' do
       collection do
         get :import

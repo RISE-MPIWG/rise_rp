@@ -89,6 +89,8 @@ GEM
     elasticsearch-transport (6.1.0)
       faraday
       multi_json
+    enum_help (0.0.17)
+      activesupport (>= 3.0.0)
     erubi (1.7.1)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -266,6 +268,7 @@ DEPENDENCIES
   cocoon
   coffee-rails
   database_cleaner
+  enum_help
   factory_bot_rails
   faker
   haml-rails

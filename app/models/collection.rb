@@ -2,21 +2,13 @@
 #
 # Table name: collections
 #
-#  id                 :bigint(8)        not null, primary key
-#  created_by_id      :integer
-#  uuid               :uuid             not null
-#  original_uuid      :string
-#  organisation_id    :bigint(8)
-#  name               :string
-#  slug               :string
-#  api_url            :string
-#  metadata           :jsonb            not null
-#  archived           :boolean          default(FALSE)
-#  access_type        :integer          default("private_access")
-#  api_mapping_module :integer          default("no_mapping_module")
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  resources_url      :string
+#  id          :bigint(8)        not null, primary key
+#  uuid        :uuid             not null
+#  name        :string
+#  metadata    :jsonb            not null
+#  import_type :integer          default("script")
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 
 class Collection < ApplicationRecord
@@ -27,6 +19,10 @@ class Collection < ApplicationRecord
   has_many :resources, inverse_of: :collection, dependent: :delete_all
   has_many :sections, through: :resources
   has_many :content_units, through: :resources
+
+  IMPORT_TYPES = { script: 0, folder: 1, views: 2 }.freeze
+
+  enum import_type: IMPORT_TYPES
 
   def to_s
     name

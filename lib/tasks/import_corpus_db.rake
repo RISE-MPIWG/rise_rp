@@ -33,19 +33,20 @@ namespace :import do
 
         resource = col.resources.build(name: title, metadata: metadata)
         section = resource.sections.build(name: resource.name)
-        begin
-          full_text.first['text'].each_line do |line|
-            unless (line.empty? || line =~ /\A\s*\Z/)
-              section.content_units.build(content: line)
-            end
-          end
-        rescue
-        end
         resource.save
         section.save
+        begin
+          cus = []
+          full_text.first['text'].each_line do |line|
+            unless (line.empty? || line =~ /\A\s*\Z/)
+              cus << { content: line }
+            end
+          end
+          section.content_units.create(cus)
+        rescue
+        end
       #rescue
       #end
     end
-    ContentUnit.reindex
   end
 end

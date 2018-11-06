@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'active_model_serializers'
+gem 'enum_help'
 gem 'rails'
 gem 'haml-rails'
 gem 'pg'

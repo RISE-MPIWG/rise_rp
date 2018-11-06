@@ -1,25 +1,26 @@
 version: '3.6'
 
 services:
-  nginx:
-    restart: always
-    build: ./docker_containers/production/nginx
-    image: docker.gitlab.gwdg.de/portal.pbeloui/rise_rp/nginx_production:latest
-    links:
-      - web:web
+  traefik:
+    image: traefik:1.4
     ports:
-      - "443:443"
-      - "80:80"
+      - 80:80
+      - 8080:8080
+    networks:
+      - traefik-net
     volumes:
-      - rails-assets:/rise_rp/public/assets
-      - rails-uploads:/rise_rp/uploads
-    depends_on:
-      - web
+      - /var/run/docker.sock:/var/run/docker.sock
+    configs:
+      - source: traefik-config
+        target: /etc/traefik/traefik.toml
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
   web:
     restart: always
     links:
       - 'postgres'
-      - 'elasticsearch'
     build: 
       context: .
       dockerfile: Dockerfile-production
@@ -31,6 +32,14 @@ services:
     command: puma -C ./config/puma.rb
     deploy:
       replicas: 2
+      labels:
+        - "traefik.port=80"
+        - "traefik.backend=web"
+        - "traefik.frontend.rule=Path:/"
+    networks:
+      - traefik-net
+      - internal
+
   postgres:
     restart: always
     image: 'postgres'
@@ -39,10 +48,12 @@ services:
       POSTGRES_PASSWORD: 'rise_rp_password'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
-  elasticsearch:
-    image: elasticsearch:6.4.1
-    volumes:
-      - esdata:/usr/share/elasticsearch/data
+    networks:
+      - internal
+  # elasticsearch:
+  #   image: elasticsearch:6.4.1
+  #   volumes:
+  #     - esdata:/usr/share/elasticsearch/data
   portainer:
     ports: 
       - '9000:9000'
@@ -51,10 +62,22 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
+    networks:
+      - intenal
     deploy:
       placement:
         constraints:
           - node.role == manager
+networks:
+  traefik-net:
+    driver: overlay
+  internal:
+    driver: overlay
+
+configs:
+  traefik-config:
+    file: docker_containers/traefik/config.toml
+
 volumes:
   postgres:
     driver: local
@@ -64,5 +87,5 @@ volumes:
     driver: local
   portainer_data:
     driver: local
-  esdata:
-    driver: local
+  # esdata:
+  #   driver: local

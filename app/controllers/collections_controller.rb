@@ -43,6 +43,6 @@ class CollectionsController < ApplicationController
   end
 
   def collection_params
-    params.fetch(:collection, {}).permit(:name)
+    params.fetch(:collection, {}).permit(:name, :import_type, :import_folder)
   end
 end

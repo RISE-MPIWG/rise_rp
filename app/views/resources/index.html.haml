@@ -1,0 +1,25 @@
+.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3
+  %h1.h4 All Resources
+.table-responsive
+  %table.table.table-striped.table-sm
+    %thead
+      %tr
+        %th uuid
+        %th Name
+        %th Metadata
+        %th Section Count
+        %th Actions
+    %tbody
+      - @resources.each do |resource|
+        %tr
+          %td= resource.uuid
+          %td= resource.name
+          %td= resource.metadata
+          %td= resource.sections.size
+          %td
+            .btn-group-vertical
+              = link_to resource_sections_path(resource), class: 'btn btn-sm btn-outline-secondary' do
+                %span{"data-feather" => "folder"}
+                Sections
+
+= paginate @resources, theme: 'twitter-bootstrap-4'

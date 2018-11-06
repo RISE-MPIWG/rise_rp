@@ -21,7 +21,7 @@
           .sidebar-sticky
             %ul.nav.flex-column
               %li.nav-item
-                = active_link_to root_path,active: [pages: :index], class: 'nav-link' do
+                = active_link_to root_path, active: [pages: :index], class: 'nav-link' do
                   %span{"data-feather" => "home"}
                   Home
                 %span.sr-only (current)
@@ -29,6 +29,10 @@
                 = active_link_to [:collections], class: 'nav-link' do
                   %span{"data-feather" => "box"}
                   Collections
+              %li.nav-item
+                = active_link_to [:resources], class: 'nav-link' do
+                  %span{"data-feather" => "box"}
+                  Resources
               %li.nav-item
                 %a.nav-link{:href => "#"}
                   %span{"data-feather" => "bar-chart-2"}
