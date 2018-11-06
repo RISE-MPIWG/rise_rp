@@ -19,7 +19,7 @@ class Resource < ApplicationRecord
 
   belongs_to :collection, inverse_of: :resources
 
-  has_many :sections, inverse_of: :resource
+  has_many :sections, inverse_of: :resource, dependent: :destroy
   has_many :content_units, through: :sections
 
   def to_s

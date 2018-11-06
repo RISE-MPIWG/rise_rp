@@ -19,7 +19,7 @@ class Section < ApplicationRecord
   has_ancestry
 
   belongs_to :resource, inverse_of: :sections
-  has_many :content_units, inverse_of: :section, dependent: :delete_all
+  has_many :content_units, inverse_of: :section, dependent: :destroy
 
   def content_unit_count
     content_units.count

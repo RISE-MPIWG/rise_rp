@@ -16,8 +16,8 @@ class Collection < ApplicationRecord
   include UuidFindable
   default_scope { order(name: :asc) }
 
-  has_many :resources, inverse_of: :collection, dependent: :delete_all
-  has_many :sections, through: :resources
+  has_many :resources, inverse_of: :collection, dependent: :destroy
+  has_many :sections, through: :resources, dependent: :destroy
   has_many :content_units, through: :resources
 
   IMPORT_TYPES = { script: 0, folder: 1, views: 2 }.freeze
