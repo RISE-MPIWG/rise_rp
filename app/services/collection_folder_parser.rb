@@ -22,7 +22,6 @@ class CollectionFolderParser
 
   def create_hierarchy
     file_paths = parse_folder
-    debugger
     file_paths.each do |path|
       path_array = path.split('/')
       path_array.each_cons(2) do |previous, element|
