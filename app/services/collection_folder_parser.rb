@@ -1,5 +1,6 @@
 require 'find'
 require 'fileutils'
+require 'yaml'
 
 class CollectionFolderParser
   attr_reader :collection
@@ -12,16 +13,31 @@ class CollectionFolderParser
     @collection = collection
   end
 
-  def parse_folder
+  def parse_folder(exp)
     file_paths = []
     Find.find(collection.import_folder) do |path|
-      file_paths << path if path =~ /.*\.txt$/
+      file_paths << path if path =~ exp
     end
     file_paths
   end
 
+  def add_metadata
+    file_paths = parse_folder(/.*\.yaml$/)
+    file_paths.each do |path|
+      path_array = path.split('/')
+      path_array.each_cons(2) do |previous, element|
+      	if element.include? '.yaml'
+      	  yaml_data = YAML::load_file(path)
+      	  target = Collection.find_by(name: previous) || Resource.find_by(name: previous) || Section.find_by(name: previous) || ContentUnit.find_by(name: previous)
+      	  target.metadata = yaml_data
+      	  target.save
+      	end
+      end
+    end
+  end
+
   def create_hierarchy
-    file_paths = parse_folder
+    file_paths = parse_folder(/.*\.txt$/)
     file_paths.each do |path|
       path_array = path.split('/')
       path_array.each_cons(2) do |previous, element|

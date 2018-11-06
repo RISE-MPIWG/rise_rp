@@ -39,6 +39,7 @@ class Collection < ApplicationRecord
       self.reload
       cfp = CollectionFolderParser.new(self)
       cfp.create_hierarchy
+      cfp.add_metadata
     when :views
     end
   end
