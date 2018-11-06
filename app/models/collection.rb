@@ -28,6 +28,21 @@ class Collection < ApplicationRecord
     name
   end
 
+  def check_and_parse!
+    case import_type.to_sym
+    when :script
+    when :folder
+      section_ids = self.sections.map(&:id)
+      ContentUnit.where(section_id: section_ids).delete_all
+      Section.where(id: section_ids).delete_all
+      self.resources.delete_all
+      self.reload
+      cfp = CollectionFolderParser.new(self)
+      cfp.create_hierarchy
+    when :views
+    end
+  end
+
   def resource_count
     resources.count
   end

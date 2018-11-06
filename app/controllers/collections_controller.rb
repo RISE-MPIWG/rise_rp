@@ -19,6 +19,7 @@ class CollectionsController < ApplicationController
   def create
     @collection = Collection.new(collection_params)
     if @collection.save
+      @collection.check_and_parse!
       redirect_to [Collection], notice: 'Collection was successfully created.'
     else
       render :new
@@ -27,6 +28,7 @@ class CollectionsController < ApplicationController
 
   def update
     if @collection.update(collection_params)
+      @collection.check_and_parse!
       redirect_to Collection, notice: 'Collection was successfully updated.'
     else
       render :edit

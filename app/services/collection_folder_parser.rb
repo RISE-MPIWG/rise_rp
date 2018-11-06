@@ -30,17 +30,17 @@ class CollectionFolderParser
         end
 
         if collection.resources.map(&:name).include? previous
-          resource = Resource.find_by(name: previous)
+          resource = collection.resources.find_by(name: previous)
           section = resource.sections.find_or_create_by(name: element)
           section.save
         end
 
         if collection.sections.map(&:name).include? previous
-          parent_section = Section.find_by(name: previous)
+          parent_section = collection.sections.find_by(name: previous)
           if element.include? '.txt'
             file = File.open(path)
             file.each_line do |line|
-              content_unit = parent_section.content_units.find_or_create_by(name: element, content: line)
+              parent_section.content_units.find_or_create_by(name: element, content: line)
             end
           else
             resource = parent_section.resource
