@@ -12,7 +12,7 @@ namespace :import do
     Section.where(resource_id: res_ids).delete_all
     Resource.where(collection_id: col.id).delete_all
     col.destroy
-    col = Collection.create(name: 'Arabic Poetry', metadata: { content_unit_type: 'line' })
+    col = Collection.create(name: 'Arabic Poetry', metadata: { content_unit_type: 'line', language: 'ar' })
     
     files_path = './corpora/adab'
     Dir.glob("#{files_path}/*").each do |filename|
@@ -31,7 +31,7 @@ namespace :import do
           name: section_data[:name],
           metadata: section_data[:metadata]
         )
-        content_units = section_data[:content_units]
+        content_units = section_data['contentUnits']
         content_units.each do |cu_data|
           section.content_units.create(
             uuid: cu_data[:uuid],

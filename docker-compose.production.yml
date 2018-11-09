@@ -9,12 +9,12 @@ services:
       - web:web
     ports:
       - "443:443"
-      - "80:80"
     volumes:
       - rails-assets:/rise_rp/public/assets
       - rails-uploads:/rise_rp/uploads
     depends_on:
       - web
+      - portainer
   web:
     restart: always
     depends_on:
@@ -38,18 +38,18 @@ services:
       POSTGRES_PASSWORD: 'rise_rp_password'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
-  # portainer:
-  #   ports: 
-  #     - '9000:9000'
-  #   image: portainer/portainer
-  #   command: -H unix:///var/run/docker.sock
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #     - portainer_data:/data
-  #   deploy:
-  #     placement:
-  #       constraints:
-  #         - node.role == manager
+  portainer:
+    ports: 
+      - '9000:9000'
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 volumes:
   postgres:
     driver: local
