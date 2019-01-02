@@ -26,7 +26,6 @@ services:
     image: elasticsearch:6.4.1
     volumes:
       - esdata:/usr/share/elasticsearch/data
-
 volumes:
   postgres:
   esdata:

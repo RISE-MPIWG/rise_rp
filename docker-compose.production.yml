@@ -1,5 +1,4 @@
 version: '3.6'
-
 services:
   nginx:
     restart: always
@@ -19,6 +18,7 @@ services:
     restart: always
     depends_on:
       - 'postgres'
+      - 'elasticsearch'
     build: 
       context: .
       dockerfile: Dockerfile-production
@@ -30,6 +30,10 @@ services:
     command: puma -C ./config/puma.rb
     deploy:
       replicas: 2
+  elasticsearch:
+    image: elasticsearch:6.4.1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
   postgres:
     restart: always
     image: 'postgres'
@@ -58,4 +62,6 @@ volumes:
   rails-uploads:
     driver: local
   portainer_data:
+    driver: local
+  esdata:
     driver: local

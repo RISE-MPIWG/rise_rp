@@ -17,6 +17,7 @@ gem 'api-pagination'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 gem 'searchkick'
+gem "octokit", "~> 4.0"
 
 group :development, :test do
   gem 'rspec-rails'
