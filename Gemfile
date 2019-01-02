@@ -4,6 +4,7 @@ gem 'active_model_serializers'
 gem 'enum_help'
 gem 'rails'
 gem 'haml-rails'
+gem 'connection_pool'
 gem 'pg'
 gem 'jquery-rails'
 gem 'puma'
@@ -17,6 +18,8 @@ gem 'api-pagination'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 gem 'searchkick'
+gem 'redis'
+gem 'typhoeus'
 gem "octokit", "~> 4.0"
 
 group :development, :test do

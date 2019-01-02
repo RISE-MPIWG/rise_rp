@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  redis:
+    image: 'redis:latest'
+    command: redis-server
+    volumes:
+      - 'redis:/var/lib/redis/data'
+  elasticsearch:
+    image: elasticsearch:6.4.1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
   postgres:
     image: postgres
     environment:
@@ -14,6 +23,9 @@ services:
     links:
       - 'postgres'
       - 'elasticsearch'
+    depends_on:
+      - 'postgres'
+      - 'elasticsearch'
     build: .
     ports:
       - '4000:4000'
@@ -21,12 +33,8 @@ services:
       - '.:/rise_rp'
     env_file:
       - '.env'
-
-  elasticsearch:
-    image: elasticsearch:6.4.1
-    volumes:
-      - esdata:/usr/share/elasticsearch/data
 volumes:
   postgres:
   esdata:
+  redis:
 

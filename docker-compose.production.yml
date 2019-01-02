@@ -14,11 +14,17 @@ services:
     depends_on:
       - web
       - portainer
+  redis:
+    image: 'redis:latest'
+    command: redis-server
+    volumes:
+      - 'redis:/var/lib/redis/data'
   web:
     restart: always
     depends_on:
       - 'postgres'
       - 'elasticsearch'
+      - 'redis'
     build: 
       context: .
       dockerfile: Dockerfile-production
@@ -64,4 +70,6 @@ volumes:
   portainer_data:
     driver: local
   esdata:
+    driver: local
+  redis:
     driver: local
