@@ -17,6 +17,7 @@ WORKDIR $INSTALL_PATH
 
 COPY Gemfile Gemfile.lock ./
 COPY Gemfile Gemfile
+RUN gem update --system
 RUN gem install bundler
 RUN bundle install
 VOLUME ["$INSTALL_PATH/public"]
