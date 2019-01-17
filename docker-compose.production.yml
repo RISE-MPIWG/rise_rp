@@ -35,7 +35,7 @@ services:
       - rails-assets:/rise_rp/public/assets
     command: puma -C ./config/puma.rb
     deploy:
-      replicas: 2
+      replicas: 1
   elasticsearch:
     image: elasticsearch:6.4.1
     volumes:
