@@ -14,3 +14,6 @@
 /log/*.log
 /tmp
 /corpora
+/docker_containers/production/nginx/rise-rp.csr
+/docker_containers/production/nginx/rise-rp.key
+/docker_containers/production/nginx/rise-rp.pem
