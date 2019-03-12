@@ -1,7 +1,7 @@
 RISE RESOURCE PROVIDER APP
 
 This rails application allows you to maintain collections, resources, sections and 
-content units and make them available through a RISE-compatible api.
+content units and make them available through a SHINE-compatible api.
 
 INSTALLATION
 you will need to have docker and docker-compose installed on the host you wish to run this software on.
