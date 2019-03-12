@@ -4,4 +4,17 @@ This rails application allows you to maintain collections, resources, sections a
 content units and make them available through a RISE-compatible api.
 
 INSTALLATION
-you will need to be able to run docker.
+you will need to have docker and docker-compose installed on the host you wish to run this software on.
+
+> docker-compose up --build
+wait until the stack is up, then,
+> docker exec -it rise_rp_web_1 bash
+will take you into the web container. then, execute the following within the container:
+> bundle exec rake db:create
+> bundle exec rake db:migrate
+to set up the database.
+and you should be good to go!
+you can deploy the stack to a docker swarm host by doing the following:
+> export DOCKER_HOST=<your.docker.host>:2375
+> docker stack deploy -c docker-compose.production.yml rise_rp --with-registry-auth
+although you might need to have access to fresh builds of the images required by the stack: please modify docker-compose.production.yml to your convenience.
