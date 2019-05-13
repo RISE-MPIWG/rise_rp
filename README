@@ -1,20 +1,39 @@
-RISE RESOURCE PROVIDER APP
+# RISE Resource Provider Application
 
-This rails application allows you to maintain collections, resources, sections and 
-content units and make them available through a SHINE-compatible api.
+This application allows you to maintain collections, resources, sections and 
+content units and make them available through a SHINE-compatible api. It relies on docker for development as well as for deployment.
 
-INSTALLATION
-you will need to have docker and docker-compose installed on the host you wish to run this software on.
+## Installation
 
-> docker-compose up --build
-wait until the stack is up, then,
-> docker exec -it rise_rp_web_1 bash
-will take you into the web container. then, execute the following within the container:
-> bundle exec rake db:create
-> bundle exec rake db:migrate
-to set up the database.
-and you should be good to go!
+First, you will need to install docker. Please visit https://docs.docker.com/install/ and install the appropriate docker CE package for your operating system.
+
+Then, you will need to run the application stack by running
+```bash
+docker-compose up --build
+```
+in the folder in which you have cloned this repository.
+
+You will then have to create and migrate the database. To do this, please run
+
+```bash
+docker exec -it rise_rp_web_1 bash
+```
+This will take you into the container in which the application is running. Then, please run
+
+```bash
+bundle exec rake db:create
+bundle exec rake db:migrate
+```
+You should then see a few messages indicating that the database has been created, and that the structure has been migrated. The Application is now ready to be used!
+
 you can deploy the stack to a docker swarm host by doing the following:
-> export DOCKER_HOST=<your.docker.host>:2375
-> docker stack deploy -c docker-compose.production.yml rise_rp --with-registry-auth
+
+```bash
+export DOCKER_HOST=<your.docker.host>:2375
+docker stack deploy -c docker-compose.production.yml rise_rp --with-registry-auth
+```
 although you might need to have access to fresh builds of the images required by the stack: please modify docker-compose.production.yml to your convenience.
+
+## Usage
+
+TBD
