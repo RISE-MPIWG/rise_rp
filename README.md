@@ -36,4 +36,4 @@ although you might need to have access to fresh builds of the images required by
 
 ## Usage
 
-TBD
+The RISE Resource Provider Reference Implementation allows its users to securely host and serve textual data and connect it to the RISE & SHINE Infrastructure. For more information about this piece of software, please contact the RISE & SHINE Team at swang@mpiwg-berlin.mpg.de.
